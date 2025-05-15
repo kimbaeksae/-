@@ -1,0 +1,28 @@
+def add_to_cart(cart):
+    while True:
+        print("\n[구입]")
+        item = input("상품명? ")
+        if item == "":
+            break
+        qty = int(input("수량은? "))
+        cart[item] = qty
+        print(f"장바구니에 {item} {qty}개가 담겼습니다.")
+
+def print_cart(cart):
+    print(f"\n>>> 장바구니 보기: {cart}")
+
+def search_cart(cart):
+    print("\n[검색]")
+    item = input("장바구니에서 확인하고자 하는 상품은? ")
+    if item in cart:
+        print(f"{item}(은)는 {cart[item]}개 담겨 있습니다.")
+    else:
+        print(f"장바구니에 {item}(은)는 없습니다.")
+
+def main():
+    cart = {}
+    add_to_cart(cart)
+    print_cart(cart)
+    search_cart(cart)
+
+main()
