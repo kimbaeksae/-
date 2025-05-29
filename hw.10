@@ -1,0 +1,45 @@
+import pickle
+import os
+
+def input_scores():
+    scores = []
+    i = 1
+    while True:
+        score = int(input(f"#{i}? "))
+        if score < 0:
+            break
+        scores.append(score)
+        i += 1
+    return scores
+
+def get_average(scores):
+    return sum(scores) / len(scores)
+
+def show_scores(scores):
+    print("\n[점수 출력]")
+    print("개인점수:", end=' ')
+    for s in scores:
+        print(s, end=' ')
+    print()
+    avg = get_average(scores)
+    print(f"평균: {avg:.1f}")
+
+def save_scores(scores):
+    with open("score.bin", "wb") as f:
+        pickle.dump(scores, f)
+
+def load_scores():
+    with open("score.bin", "rb") as f:
+        return pickle.load(f)
+
+def main():
+    if os.path.exists("score.bin"):
+        print("[파일 읽기]")
+        scores = load_scores()
+    else:
+        scores = input_scores()
+        save_scores(scores)
+    
+    show_scores(scores)
+
+main()
